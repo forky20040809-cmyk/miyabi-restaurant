@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>雅 Miyabi | 日式料理</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+TC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1611;
+    --ink-muted: #5a5249;
+    --ink-faint: #9a908a;
+    --washi: #f7f4ef;
+    --cream: #fdfbf8;
+    --accent: #8b1a1a;
+    --accent-light: #c8524a;
+    --gold: #c4973a;
+    --border: rgba(26,22,17,0.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 4rem;
+    background: rgba(253,251,248,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s ease;
+  }
+  .nav-logo {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.5rem; font-weight: 400;
+    letter-spacing: 0.2em;
+    color: var(--ink);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .nav-logo span.kanji { font-size: 2rem; color: var(--accent); line-height: 1; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-muted); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-reserve {
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 0.6rem 1.5rem;
+    border: 1px solid var(--ink); border-radius: 0;
+    background: transparent; color: var(--ink); cursor: pointer;
+    transition: all 0.25s;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .nav-reserve:hover { background: var(--ink); color: var(--cream); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+  }
+  .hero-text {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 6rem 4rem 6rem 5rem;
+  }
+  .hero-eyebrow {
+    font-size: 0.7rem; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block; width: 2.5rem; height: 1px; background: var(--accent);
+  }
+  .hero-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    font-weight: 300; line-height: 1.15;
+    letter-spacing: 0.05em; margin-bottom: 0.5rem;
+  }
+  .hero-title-en {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    font-style: italic; font-weight: 300;
+    color: var(--ink-muted); letter-spacing: 0.1em;
+    margin-bottom: 2rem;
+  }
+  .hero-desc {
+    font-size: 0.9rem; line-height: 2; color: var(--ink-muted);
+    max-width: 400px; margin-bottom: 3rem;
+  }
+  .hero-cta {
+    display: flex; gap: 1.5rem; align-items: center;
+  }
+  .btn-primary {
+    padding: 0.9rem 2.5rem;
+    background: var(--accent); color: var(--cream);
+    font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase;
+    border: none; cursor: pointer;
+    font-family: 'Noto Sans TC', sans-serif; font-weight: 400;
+    transition: background 0.25s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { background: #6e1414; }
+  .btn-ghost {
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--ink-muted); text-decoration: none;
+    display: flex; align-items: center; gap: 0.5rem;
+    transition: color 0.2s;
+  }
+  .btn-ghost:hover { color: var(--ink); }
+  .btn-ghost::after { content: '→'; font-size: 1rem; }
+
+  .hero-image {
+    position: relative; overflow: hidden;
+    background: var(--washi);
+  }
+  .hero-image-inner {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #2d1e0f 0%, #1a1611 60%, #8b1a1a22 100%);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  /* Decorative Japanese motif SVG */
+  .hero-motif {
+    position: absolute; opacity: 0.08;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 28rem; color: #f7f4ef;
+    line-height: 1; user-select: none;
+    animation: float 8s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  .hero-badge {
+    position: absolute; bottom: 3rem; left: 3rem;
+    border: 1px solid rgba(247,244,239,0.25);
+    padding: 1.5rem 2rem;
+    color: rgba(247,244,239,0.8);
+  }
+  .hero-badge-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem; font-weight: 300; line-height: 1;
+    color: var(--gold); display: block; margin-bottom: 0.25rem;
+  }
+  .hero-badge-label {
+    font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: rgba(247,244,239,0.6);
+  }
+  .hero-line {
+    position: absolute; top: 3rem; right: 3rem; bottom: 3rem; left: 3rem;
+    border: 1px solid rgba(247,244,239,0.06); pointer-events: none;
+  }
+
+  /* SECTION SHARED */
+  section { padding: 7rem 5rem; }
+  .section-tag {
+    font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300; line-height: 1.3; margin-bottom: 0.5rem;
+  }
+  .section-title-en {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-style: italic; font-weight: 300;
+    color: var(--ink-muted); margin-bottom: 2.5rem;
+  }
+
+  /* ABOUT */
+  .about {
+    background: var(--washi);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
+    align-items: center;
+  }
+  .about-image-block {
+    position: relative; aspect-ratio: 4/5; overflow: hidden;
+  }
+  .about-img {
+    width: 100%; height: 100%;
+    background: #2d1e0f;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .about-img-char {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 14rem; font-weight: 300;
+    color: rgba(247,244,239,0.06);
+    position: absolute;
+  }
+  .about-img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(26,22,17,0.4) 100%);
+  }
+  .about-img-label {
+    position: absolute; bottom: 2rem; left: 2rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-style: italic; font-weight: 300;
+    color: rgba(247,244,239,0.85); letter-spacing: 0.08em;
+  }
+  .about-accent-box {
+    position: absolute; top: -1.5rem; right: -1.5rem;
+    width: 60%; height: 60%;
+    border: 1px solid var(--border); z-index: -1;
+    background: var(--cream);
+  }
+  .about-text p {
+    font-size: 0.9rem; line-height: 2.2; color: var(--ink-muted); margin-bottom: 1.5rem;
+  }
+  .about-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; margin-top: 3rem;
+    padding-top: 3rem; border-top: 1px solid var(--border);
+  }
+  .about-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem; font-weight: 300; color: var(--accent); display: block;
+  }
+  .about-stat-label {
+    font-size: 0.7rem; letter-spacing: 0.15em; color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+
+  /* MENU */
+  .menu { background: var(--cream); }
+  .menu-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 3.5rem;
+  }
+  .menu-tabs {
+    display: flex; gap: 0; border-bottom: 1px solid var(--border);
+    margin-bottom: 3rem;
+  }
+  .menu-tab {
+    padding: 0.75rem 2rem;
+    font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-muted); cursor: pointer; border: none; background: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    border-bottom: 2px solid transparent; margin-bottom: -1px;
+    transition: all 0.2s;
+  }
+  .menu-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .menu-tab:hover { color: var(--ink); }
+  .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  .menu-card {
+    border: 1px solid var(--border); padding: 2rem;
+    transition: border-color 0.25s, transform 0.25s;
+    cursor: default;
+  }
+  .menu-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .menu-card-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem; color: var(--ink-faint); margin-bottom: 1rem;
+    letter-spacing: 0.1em;
+  }
+  .menu-card-name {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.15rem; font-weight: 400; margin-bottom: 0.25rem;
+  }
+  .menu-card-name-en {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem; font-style: italic; color: var(--ink-muted);
+    margin-bottom: 1rem;
+  }
+  .menu-card-desc {
+    font-size: 0.8rem; line-height: 1.9; color: var(--ink-muted);
+    margin-bottom: 1.5rem;
+  }
+  .menu-card-footer { display: flex; align-items: center; justify-content: space-between; }
+  .menu-card-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem; font-weight: 300; color: var(--accent);
+  }
+  .menu-card-tag {
+    font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid var(--border); color: var(--ink-faint);
+  }
+  .menu-card-tag.seasonal { border-color: var(--gold); color: var(--gold); }
+  .menu-content { display: none; }
+  .menu-content.active { display: block; }
+
+  /* EXPERIENCE */
+  .experience {
+    background: var(--ink);
+    color: var(--cream);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    padding: 0;
+  }
+  .experience-left {
+    padding: 7rem 4rem 7rem 5rem;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .experience-left .section-tag { color: var(--gold); }
+  .experience-left .section-title { color: var(--cream); }
+  .experience-left .section-title-en { color: rgba(247,244,239,0.5); }
+  .experience-left p {
+    font-size: 0.85rem; line-height: 2.1;
+    color: rgba(247,244,239,0.7); margin-bottom: 1rem;
+  }
+  .exp-items { margin-top: 3rem; display: flex; flex-direction: column; gap: 1.5rem; }
+  .exp-item {
+    display: flex; gap: 1.5rem; align-items: flex-start;
+    padding-bottom: 1.5rem; border-bottom: 1px solid rgba(247,244,239,0.08);
+  }
+  .exp-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .exp-item-icon {
+    width: 2.5rem; height: 2.5rem; min-width: 2.5rem;
+    border: 1px solid rgba(247,244,239,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+  }
+  .exp-item-title {
+    font-family: 'Noto Serif JP', serif; font-size: 0.95rem; margin-bottom: 0.25rem;
+  }
+  .exp-item-desc {
+    font-size: 0.78rem; line-height: 1.8; color: rgba(247,244,239,0.55);
+  }
+  .experience-right {
+    position: relative; overflow: hidden;
+    background: linear-gradient(180deg, #2d1e0f 0%, #1a1611 100%);
+    min-height: 500px;
+  }
+  .experience-right-char {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 20rem; font-weight: 300;
+    color: rgba(247,244,239,0.04); user-select: none;
+  }
+  .exp-quote {
+    position: absolute; bottom: 4rem; left: 3rem; right: 3rem;
+    border-left: 2px solid var(--gold);
+    padding: 1.5rem 2rem;
+  }
+  .exp-quote-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-style: italic; font-weight: 300;
+    color: rgba(247,244,239,0.85); line-height: 1.7; margin-bottom: 0.75rem;
+  }
+  .exp-quote-author {
+    font-size: 0.7rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase;
+  }
+
+  /* RESERVATION */
+  .reservation { background: var(--washi); text-align: center; }
+  .reservation .section-title { margin-bottom: 0.5rem; }
+  .reservation .section-title-en { margin-bottom: 3rem; }
+  .reservation-desc {
+    font-size: 0.88rem; line-height: 2; color: var(--ink-muted);
+    max-width: 500px; margin: 0 auto 3.5rem;
+  }
+  .res-form {
+    max-width: 700px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  }
+  .res-form-full { grid-column: 1 / -1; }
+  .res-input {
+    width: 100%; padding: 1rem 1.25rem;
+    border: 1px solid var(--border);
+    background: var(--cream); color: var(--ink);
+    font-family: 'Noto Sans TC', sans-serif; font-size: 0.85rem; font-weight: 300;
+    outline: none; transition: border-color 0.2s;
+  }
+  .res-input:focus { border-color: var(--accent); }
+  .res-select {
+    width: 100%; padding: 1rem 1.25rem;
+    border: 1px solid var(--border);
+    background: var(--cream); color: var(--ink);
+    font-family: 'Noto Sans TC', sans-serif; font-size: 0.85rem; font-weight: 300;
+    outline: none; cursor: pointer; appearance: none;
+    transition: border-color 0.2s;
+  }
+  .res-select:focus { border-color: var(--accent); }
+  .res-submit {
+    grid-column: 1 / -1;
+    padding: 1rem; margin-top: 1rem;
+    background: var(--accent); color: var(--cream); border: none;
+    font-family: 'Noto Sans TC', sans-serif; font-size: 0.78rem;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    cursor: pointer; transition: background 0.25s;
+  }
+  .res-submit:hover { background: #6e1414; }
+  .res-note {
+    font-size: 0.72rem; color: var(--ink-faint); margin-top: 1.5rem;
+    letter-spacing: 0.05em; grid-column: 1/-1;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink); color: rgba(247,244,239,0.7);
+    padding: 4rem 5rem;
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 4rem;
+  }
+  .footer-brand {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 2rem; font-weight: 300; color: var(--cream);
+    margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;
+  }
+  .footer-brand .kanji { color: var(--accent); }
+  .footer-desc { font-size: 0.78rem; line-height: 2; color: rgba(247,244,239,0.45); }
+  .footer-col-title {
+    font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem;
+  }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+  .footer-links a {
+    font-size: 0.8rem; color: rgba(247,244,239,0.55); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--cream); }
+  .footer-info p { font-size: 0.78rem; line-height: 2; color: rgba(247,244,239,0.45); }
+  .footer-bottom {
+    background: #0e0c0a; padding: 1.25rem 5rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-bottom p {
+    font-size: 0.7rem; color: rgba(247,244,239,0.3); letter-spacing: 0.1em;
+  }
+  .footer-social { display: flex; gap: 1.5rem; }
+  .footer-social a {
+    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(247,244,239,0.3); text-decoration: none; transition: color 0.2s;
+  }
+  .footer-social a:hover { color: var(--cream); }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px; background: var(--border); margin: 0 5rem;
+  }
+
+  /* FAQ */
+  .faq-item { border: 1px solid var(--border); background: var(--cream); }
+  .faq-q {
+    width: 100%; display: flex; justify-content: space-between; align-items: center;
+    padding: 1.5rem 2rem; background: none; border: none; cursor: pointer;
+    font-family: 'Noto Sans TC', sans-serif; font-size: 0.95rem; font-weight: 400;
+    color: var(--ink); text-align: left; gap: 1rem; transition: background 0.2s;
+  }
+  .faq-q:hover { background: var(--washi); }
+  .faq-q.open { background: var(--washi); color: var(--accent); }
+  .faq-icon { font-size: 1.3rem; font-weight: 300; min-width: 1.5rem; text-align: center; color: var(--accent); transition: transform 0.3s; }
+  .faq-q.open .faq-icon { transform: rotate(45deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s; padding: 0 2rem; }
+  .faq-a.open { max-height: 300px; padding: 1.25rem 2rem 1.75rem; }
+  .faq-a p { font-size: 0.88rem; line-height: 2; color: var(--ink-muted); }
+
+  /* Animations */
+  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-in.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1.25rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-image { display: none; }
+    .hero-text { padding: 4rem 2rem; }
+    section { padding: 5rem 2rem; }
+    .about { grid-template-columns: 1fr; gap: 3rem; }
+    .about-accent-box { display: none; }
+    .menu-grid { grid-template-columns: 1fr 1fr; }
+    .experience { grid-template-columns: 1fr; }
+    .experience-right { min-height: 350px; }
+    .res-form { grid-template-columns: 1fr; }
+    .res-form-full { grid-column: 1; }
+    .res-submit { grid-column: 1; }
+    .res-note { grid-column: 1; }
+    footer { grid-template-columns: 1fr 1fr; gap: 2.5rem; padding: 3rem 2rem; }
+    .footer-bottom { padding: 1rem 2rem; flex-direction: column; gap: 0.75rem; text-align: center; }
+    .divider { margin: 0 2rem; }
+    .menu-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <span class="kanji">雅</span> Miyabi
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">關於我們</a></li>
+    <li><a href="#chef">主廚</a></li>
+    <li><a href="#menu">菜單</a></li>
+    <li><a href="#experience">用餐體驗</a></li>
+    <li><a href="#reviews">評論</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#reservation">訂位</a></li>
+  </ul>
+  <button class="nav-reserve" onclick="document.getElementById('reservation').scrollIntoView({behavior:'smooth'})">立即訂位</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding:0;">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Taipei · Est. 2018</p>
+    <h1 class="hero-title">雅</h1>
+    <p class="hero-title-en">Miyabi — The Art of Japanese Cuisine</p>
+    <p class="hero-desc">
+      在繁忙都市中尋得一片寧靜。我們以季節食材為靈魂，以傳統技藝為基底，呈現最純粹的日本料理美學。
+    </p>
+    <div class="hero-cta">
+      <a href="#reservation" class="btn-primary">預訂座位</a>
+      <a href="#menu" class="btn-ghost">探索菜單</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <div class="hero-image-inner">
+      <div class="hero-line"></div>
+      <span class="hero-motif">雅</span>
+      <div class="hero-badge">
+        <span class="hero-badge-num">12</span>
+        <span class="hero-badge-label">Omakase Courses</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-image-block fade-in">
+    <div class="about-img">
+      <span class="about-img-char">和</span>
+      <div class="about-img-overlay"></div>
+      <span class="about-img-label">Harmony in every dish</span>
+    </div>
+    <div class="about-accent-box"></div>
+  </div>
+  <div class="about-text fade-in">
+    <p class="section-tag">關於雅 · About Us</p>
+    <h2 class="section-title">料理即是藝術</h2>
+    <p class="section-title-en">Cuisine as a Form of Art</p>
+    <p>
+      雅 Miyabi 由主廚林宸佑於2018年創立。林宸佑自幼熱愛料理，二十歲負笈日本，先後於京都懷石名店「瓢亭」及東京米其林三星割烹習藝長達十五年，深刻體會「一期一會」的精神。返台後，他決心以台灣豐沛的在地食材結合道地日本技藝，打造這片屬於台灣的料理美學空間。
+    </p>
+    <p>
+      Chef Lin Cheng-Yu honed his craft over 15 years in Japan — at the legendary Hyotei in Kyoto and a three-Michelin-star kappo in Tokyo. Returning to Taiwan, he founded Miyabi to bridge the finest Japanese culinary traditions with the island's exceptional local produce.
+    </p>
+    <div class="about-stats">
+      <div>
+        <span class="about-stat-num">15+</span>
+        <span class="about-stat-label">年日本習藝</span>
+      </div>
+      <div>
+        <span class="about-stat-num">98%</span>
+        <span class="about-stat-label">顧客好評率</span>
+      </div>
+      <div>
+        <span class="about-stat-num">40</span>
+        <span class="about-stat-label">精選座位</span>
+      </div>
+    </div>
+    <div style="margin-top:2rem; padding:1.5rem; border-left: 2px solid var(--accent); background: var(--cream);">
+      <p style="font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-style:italic; color:var(--ink-muted); line-height:1.8; margin-bottom:0.5rem;">"料理不只是填飽肚子，而是以食物傳遞情感，讓每一位到訪的客人，都能感受到被珍視的溫度。"</p>
+      <p style="font-size:0.72rem; letter-spacing:0.15em; color:var(--accent); text-transform:uppercase;">— 林宸佑 Chef Lin Cheng-Yu</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CHEF SECTION -->
+<section id="chef" style="background:var(--cream); padding:7rem 5rem;">
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:center;">
+    <div class="fade-in">
+      <p class="section-tag">主廚介紹 · Meet the Chef</p>
+      <h2 class="section-title">林宸佑</h2>
+      <p class="section-title-en">Chef Lin Cheng-Yu</p>
+      <p style="font-size:0.9rem;line-height:2.2;color:var(--ink-muted);margin-bottom:1.25rem;">
+        1985年生於台南，林宸佑自高中起便深受日本飲食文化吸引。19歲隻身赴日，初入京都老舖磨練基本功，從洗碗、備料做起，五年後獲得師父認可，升任板前主廚助理。
+      </p>
+      <p style="font-size:0.9rem;line-height:2.2;color:var(--ink-muted);margin-bottom:1.25rem;">
+        2008年轉赴東京，加入米其林三星割烹「銀座 木村」，在嚴格的日式廚房文化中淬鍊技藝，精通懷石料理各道工序，並深研高湯萃取、刀工美學與食材時令哲學。
+      </p>
+      <p style="font-size:0.9rem;line-height:2.2;color:var(--ink-muted);margin-bottom:2rem;">
+        Born in Tainan in 1985, Chef Lin left for Japan at 19 with nothing but passion. After fifteen years mastering kaiseki at Kyoto's Hyotei and a Michelin three-star kappo in Ginza, he returned home to open Miyabi — a restaurant that marries Japanese technique with the abundance of Taiwan's land and sea.
+      </p>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+        <div style="padding:1.25rem; border:1px solid var(--border);">
+          <p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem;">訓練背景</p>
+          <p style="font-size:0.82rem;line-height:1.8;color:var(--ink-muted);">京都 瓢亭<br>東京 銀座 木村（米其林★★★）<br>大阪 吉兆 研修</p>
+        </div>
+        <div style="padding:1.25rem; border:1px solid var(--border);">
+          <p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem;">榮耀獎項</p>
+          <p style="font-size:0.82rem;line-height:1.8;color:var(--ink-muted);">2021 台灣美食之星<br>2022 亞洲50最佳餐廳提名<br>2023 米其林必比登推介</p>
+        </div>
+        <div style="padding:1.25rem; border:1px solid var(--border);">
+          <p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem;">料理哲學</p>
+          <p style="font-size:0.82rem;line-height:1.8;color:var(--ink-muted);">一期一會．食材本味<br>以台灣四季物產為魂<br>傳統技藝融合現代美學</p>
+        </div>
+        <div style="padding:1.25rem; border:1px solid var(--border);">
+          <p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem;">媒體報導</p>
+          <p style="font-size:0.82rem;line-height:1.8;color:var(--ink-muted);">商業周刊封面人物<br>天下雜誌美食專題<br>CNN Travel 台灣美食推薦</p>
+        </div>
+      </div>
+    </div>
+    <div class="fade-in" style="position:relative;">
+      <div style="aspect-ratio:3/4; background:linear-gradient(160deg,#2d1e0f,#1a1611); display:flex; align-items:center; justify-content:center; overflow:hidden; position:relative;">
+        <span style="font-family:'Noto Serif JP',serif; font-size:18rem; font-weight:300; color:rgba(247,244,239,0.05); position:absolute; user-select:none;">匠</span>
+        <div style="position:absolute; bottom:0; left:0; right:0; padding:2.5rem; background:linear-gradient(transparent,rgba(26,22,17,0.85));">
+          <p style="font-family:'Noto Serif JP',serif; font-size:1.4rem; color:var(--cream); margin-bottom:0.25rem;">林宸佑</p>
+          <p style="font-family:'Cormorant Garamond',serif; font-size:0.9rem; font-style:italic; color:var(--gold);">Head Chef & Founder, Miyabi</p>
+        </div>
+        <div style="position:absolute; top:2rem; right:2rem; border:1px solid rgba(247,244,239,0.15); padding:1rem 1.25rem; text-align:center;">
+          <span style="font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:300; color:var(--gold); display:block; line-height:1;">15</span>
+          <span style="font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(247,244,239,0.5);">Years in Japan</span>
+        </div>
+      </div>
+      <div style="position:absolute; bottom:-1.5rem; left:-1.5rem; width:55%; height:55%; border:1px solid var(--border); z-index:-1; background:var(--washi);"></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- MENU -->
+<section class="menu" id="menu">
+  <div class="menu-header fade-in">
+    <div>
+      <p class="section-tag">精選料理 · Our Menu</p>
+      <h2 class="section-title">季節菜單</h2>
+      <p class="section-title-en">Spring / Summer Seasonal Menu</p>
+    </div>
+    <a href="#" class="btn-ghost">查看完整菜單</a>
+  </div>
+
+  <div class="menu-tabs">
+    <button class="menu-tab active" onclick="switchTab(this, 'sashimi')">生魚片 Sashimi</button>
+    <button class="menu-tab" onclick="switchTab(this, 'appetizer')">前菜 Appetizer</button>
+    <button class="menu-tab" onclick="switchTab(this, 'main')">主菜 Mains</button>
+    <button class="menu-tab" onclick="switchTab(this, 'set')">套餐 Set Menu</button>
+    <button class="menu-tab" onclick="switchTab(this, 'dessert')">甜點 Dessert</button>
+  </div>
+
+  <div id="tab-sashimi" class="menu-content active">
+    <div class="menu-grid">
+      <div class="menu-card fade-in">
+        <p class="menu-card-num">001</p>
+        <h3 class="menu-card-name">鮪魚大腹</h3>
+        <p class="menu-card-name-en">Bluefin Tuna Otoro</p>
+        <p class="menu-card-desc">選自日本大間的藍鰭鮪魚大腹，油脂豐潤，入口即化，搭配自製山葵與醬油。Melt-in-your-mouth fatty tuna from Oma, Japan, served with house-made wasabi.</p>
+        <div class="menu-card-footer">
+          <span class="menu-card-price">NT$ 680</span>
+          <span class="menu-card-tag seasonal">季節限定</span>
+        </div>
+      </div>
+      <div class="menu-card fade-in">
+        <p class="menu-card-num">002</p>
+        <h3 class="menu-card-name">北海道海膽</h3>
+        <p class="menu-card-name-en">Hokkaido Uni</p>
+        <p class="menu-card-desc">每日空運北海道礼文島海膽，甘甜濃郁，附海苔酥脆餅乾。Fresh uni flown daily from Rishiri Island, Hokkaido, served with crispy nori cracker.</p>
+        <div class="menu-card-footer">
+          <span class="menu-card-price">NT$ 580</span>
+          <span class="menu-card-tag">招牌</span>
+        </div>
+      </div>
+      <div class="menu-card fade-in">
+        <p class="menu-card-num">003</p>
+        <h3 class="menu-card-name">炙燒鮭魚</h3>
+        <p class="menu-card-name-en">Aburi Salmon</p>
+        <p class="menu-card-desc">以火炙烤挪威鮭魚，搭配柚子胡椒醬，煙燻香氣與清爽柚子香完美交融。Norwegian salmon torched to perfection with yuzu kosho cream.</p>
+        <div class="menu-card-footer">
+          <span class="menu-card-price">NT$ 420</span>
+          <span class="menu-card-tag">熱門</span>
+        </div>
+      </div>
+      <div class="menu-card fade-in">
+        <p class="menu-card-num">004</p>
+        <h3 class="menu-card-name">干貝昆布締</h3>
+        <p class="menu-card-name-en">Scallop Kobujime</p>
+        <p class="menu-card-desc">北海道帆立貝以京都白板昆布包覆熟成24小時，鮮甜中帶有昆布的海洋氣息。Hokkaido scallop cured 24 hours in Kyoto kombu, bringing umami depth to natural sweetness.</p>
+        <div class="menu-card-footer">
+          <span class="menu-card-price">NT$ 480</span>
+          <span class="menu-card-tag seasonal">主廚推薦</span>
+        </div>
+      </div>
+      <div class="menu-card fade-in">
+        <p class="menu-card-num">005</p>
+        <h3 class="menu-card-name">比目魚緣側</h3>
+        <p class="menu-card-name-en">Hirame Engawa</p>
+        <p class="menu-card-desc">比目魚最珍貴的魚鰭部位，口感爽脆有嚼勁，附細蔥薑泥與橙醋。The prized fin muscle of flounder — crisp, rich, and served with ponzu, ginger and scallion.</p>
+        <div class="menu-card-footer">
+          <span class="menu-card-price">NT$ 520</span>
+          <span class="menu-card-tag">限量供應</span>
+        </div>
+      </div>
+      <div class="menu-card fade-in">
+        <p class="menu-card-num">006</p>
+        <h3 class="menu-card-name">生蠔三重奏</h3>
+        <p class="menu-card-name-en">Oyster Trio</p>
+        <p class="menu-card-desc">精選日本廣島、法國貝隆、台灣澎湖三種生蠔，各具風土特色，佐以三款醬汁品嚐。Three oysters — Hiroshima, Belon, Penghu — each with its own terroir and paired sauce.</p>
+        <div class="menu-card-footer">
+          <span class="menu-card-price">NT$ 620</span>
+          <span class="menu-card-tag seasonal">季節限定</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="tab-appetizer" class="menu-content">
+    <div class="menu-grid">
+      <div class="menu-card fade-in">
+        <p class="menu-card-num">A01</p>
+        <h3 class="menu-card-name">茶碗蒸</h3>
+        <p class="menu-card-name-en">Chawanmushi</p>
+        <p class="menu-card-desc">以一番高湯蒸製的嫩蛋，內藏百合根、銀杏與螃蟹，上覆松露高湯。Silky steamed egg custard with lily bulb, ginkgo and crab, finished with black truffle dashi.</p>
+        <div class="menu-card-footer">
+          <span class="menu-card-price">NT$ 320</span>
+          <span class="menu-card-tag">招牌</span>
+        </div>
+      </div>
+      <div class="menu-card fade-in">
+        <p class="menu-card-num">A02</p>
+        <h3 class="menu-card-name">鴨肝慕斯</h3>
+        <p class="menu-card-name-en">Duck Liver Mousse</p>
+        <p class="menu-card-desc">法式手法製作的鴨肝慕斯，抹於烤炙脆餅，搭配無花果果凍與清脆的嫩芽。Classic duck liver mousse on charcoal crisps with fig gelée and microgreens.</p>
+        <div class="menu-card-footer">
+          <span class="menu-card-price">NT$ 380</span>
+          <span class="menu-card-tag seasonal">主廚推薦</span>
+        </div>
+      </div>
+      <div class="menu-card fade-in">
+        <p class="menu-card-num">A03</p>
+        <h3 class="menu-card-name">蟹肉豆腐</h3>
+        <p class="menu-card-name-en">Kani Tofu</p>
+        <p class="menu-card-desc">手工嫩豆腐鋪上北海道松葉蟹肉，淋以柴魚蟹膏醬汁，佐紫蘇油。House-made silken tofu topped with Hokkaido snow crab, kani miso sauce and shiso oil.</p>
+        <div class="menu-card-footer">
+          <span class="menu-card-price">NT$ 420</span>
+          <span class="menu-card-tag">熱門</span>
+        </div>
+      </div>
+      <div class="menu-card fade-in">
+        <p class="menu-card-num">A04</p>
+        <h3 class="menu-card-name">海鮮清湯</h3>
+        <p class="menu-card-name-en">Kaiseki Soup</p>
+        <p class="menu-card-desc">以真昆布與本枯節熬製清澈高湯，配以當季蛤蜊、松茸與三葉草，呈現高湯本味之美。Crystal-clear dashi with seasonal clams, matsutake mushroom and mitsuba — the soul of kaiseki.</p>
+        <div class="menu-card-footer">
+          <span class="menu-card-price">NT$ 350</span>
+          <span class="menu-card-tag seasonal">季節限定</span>
+        </div>
+      </div>
+      <div class="menu-card fade-in">
+        <p class="menu-card-num">A05</p>
+        <h3 class="menu-card-name">前菜拼盤</h3>
+        <p class="menu-card-name-en">Zensai Moriawase</p>
+        <p class="menu-card-desc">每日六種小菜精巧拼盤，反映當日食材與節氣之美，各具風味，是懷石料理的縮影。A daily selection of six seasonal small bites — a miniature kaiseki journey on one plate.</p>
+        <div class="menu-card-footer">
+          <span class="menu-card-price">NT$ 680</span>
+          <span class="menu-card-tag">每日限量</span>
+        </div>
+      </div>
+      <div class="menu-card fade-in">
+        <p class="menu-card-num">A06</p>
+        <h3 class="menu-card-name">炸天婦羅</h3>
+        <p class="menu-card-name-en">Seasonal Tempura</p>
+        <p class="menu-card-desc">以薄透麵衣裹覆當季食材，現炸現吃，附抹茶鹽與蘿蔔泥天婦羅醬汁。Feather-light seasonal tempura fried to order, with matcha salt and grated daikon tentsuyu.</p>
+        <div class="menu-card-footer">
+          <span class="menu-card-price">NT$ 520</span>
+          <span class="menu-card-tag">熱門</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="tab-main" class="menu-content">
+    <div class="menu-grid">
+      <div class="menu-card fade-in">
+        <p class="menu-card-num">101</p>
+        <h3 class="menu-card-name">和牛牛排</h3>
+        <p class="menu-card-name-en">A5 Wagyu Steak</p>
+        <p class="menu-card-desc">宮崎A5和牛，以備長炭慢烤，附抹茶鹽與黑松露醬汁。Miyazaki A5 wagyu grilled over binchotan charcoal, served with matcha salt and black truffle jus.</p>
+        <div class="menu-card-footer">
+          <span class="menu-card-price">NT$ 2,480</span>
+          <span class="menu-card-tag seasonal">主廚推薦</span>
+        </div>
+      </div>
+      <div class="menu-card fade-in">
+        <p class="menu-card-num">102</p>
+        <h3 class="menu-card-name">京都鴨肉飯</h3>
+        <p class="menu-card-name-en">Kyoto Duck Rice</p>
+        <p class="menu-card-desc">京都近江鴨胸搭配日本越光米，附柴魚高湯，暖心暖胃。Near Omi duck breast with Koshihikari rice in delicate dashi broth.</p>
+        <div class="menu-card-footer">
+          <span class="menu-card-price">NT$ 980</span>
+          <span class="menu-card-tag">招牌</span>
+        </div>
+      </div>
+      <div class="menu-card fade-in">
+        <p class="menu-card-num">103</p>
+        <h3 class="menu-card-name">焦糖味噌鱈魚</h3>
+        <p class="menu-card-name-en">Miso Glazed Black Cod</p>
+        <p class="menu-card-desc">浸漬白味噌72小時的銀鱈，烤至外焦內嫩，附菠菜與薑汁醬油。72-hour white miso-marinated black cod, roasted golden, with spinach and ginger soy.</p>
+        <div class="menu-card-footer">
+          <span class="menu-card-price">NT$ 1,280</span>
+          <span class="menu-card-tag">熱門</span>
+        </div>
+      </div>
+      <div class="menu-card fade-in">
+        <p class="menu-card-num">104</p>
+        <h3 class="menu-card-name">龍蝦茶泡飯</h3>
+        <p class="menu-card-name-en">Lobster Ochazuke</p>
+        <p class="menu-card-desc">現殺活龍蝦搭配越光米飯，淋上以龍蝦殼熬製的濃郁高湯，佐山葵與漬物。Live lobster over Koshihikari rice, doused in rich lobster bisque dashi with wasabi and pickles.</p>
+        <div class="menu-card-footer">
+          <span class="menu-card-price">NT$ 1,680</span>
+          <span class="menu-card-tag seasonal">季節限定</span>
+        </div>
+      </div>
+      <div class="menu-card fade-in">
+        <p class="menu-card-num">105</p>
+        <h3 class="menu-card-name">烤鴨胸佐柚子</h3>
+        <p class="menu-card-name-en">Duck Breast Yuzu</p>
+        <p class="menu-card-desc">法式低溫烹調鴨胸，以備長炭收皮，搭配柚子醬汁、烤白蘿蔔與紅醋醬。Sous vide duck breast finished over binchotan, with yuzu sauce, charred daikon and red vinegar.</p>
+        <div class="menu-card-footer">
+          <span class="menu-card-price">NT$ 1,180</span>
+          <span class="menu-card-tag">主廚推薦</span>
+        </div>
+      </div>
+      <div class="menu-card fade-in">
+        <p class="menu-card-num">106</p>
+        <h3 class="menu-card-name">蒸籠鮮蝦燒賣</h3>
+        <p class="menu-card-name-en">Prawn Shumai</p>
+        <p class="menu-card-desc">以台灣白蝦手工製作燒賣，內藏蟹黃，以柴魚高湯蒸製，附老醋薑絲。Handmade Taiwan prawn shumai filled with crab roe, steamed in dashi, served with aged vinegar.</p>
+        <div class="menu-card-footer">
+          <span class="menu-card-price">NT$ 560</span>
+          <span class="menu-card-tag">熱門</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="tab-set" class="menu-content">
+    <div class="menu-grid">
+      <div class="menu-card fade-in">
+        <p class="menu-card-num">S01</p>
+        <h3 class="menu-card-name">懷石午間套餐</h3>
+        <p class="menu-card-name-en">Kaiseki Lunch</p>
+        <p class="menu-card-desc">8道式午間懷石料理，含前菜、刺身、燒物、主食、甜點及茶飲。8-course kaiseki lunch featuring appetizer, sashimi, grilled items, rice course, dessert and tea.</p>
+        <div class="menu-card-footer">
+          <span class="menu-card-price">NT$ 2,200</span>
+          <span class="menu-card-tag">每日限量</span>
+        </div>
+      </div>
+      <div class="menu-card fade-in">
+        <p class="menu-card-num">S02</p>
+        <h3 class="menu-card-name">主廚無菜單料理</h3>
+        <p class="menu-card-name-en">Omakase</p>
+        <p class="menu-card-desc">12道由林宸佑主廚依當日食材精心設計，每一桌皆是獨一無二的饗宴。配酒方案另計。12-course chef's omakase by Chef Lin, uniquely crafted daily. Sake pairing available.</p>
+        <div class="menu-card-footer">
+          <span class="menu-card-price">NT$ 5,800</span>
+          <span class="menu-card-tag seasonal">需提前預訂</span>
+        </div>
+      </div>
+      <div class="menu-card fade-in">
+        <p class="menu-card-num">S03</p>
+        <h3 class="menu-card-name">四人分享套餐</h3>
+        <p class="menu-card-name-en">Family Share Set</p>
+        <p class="menu-card-desc">精選10道料理供四人共享，包含各式刺身、燒物、天婦羅及甜點拼盤。A curated 10-dish spread for four, with sashimi, robata, tempura and dessert.</p>
+        <div class="menu-card-footer">
+          <span class="menu-card-price">NT$ 6,800</span>
+          <span class="menu-card-tag">4人份</span>
+        </div>
+      </div>
+      <div class="menu-card fade-in">
+        <p class="menu-card-num">S04</p>
+        <h3 class="menu-card-name">頂級和牛套餐</h3>
+        <p class="menu-card-name-en">Wagyu Prestige Set</p>
+        <p class="menu-card-desc">以和牛為主軸的尊榮套餐，涵蓋和牛握壽司、炙燒大腹、A5牛排及牛骨高湯收尾。A wagyu-focused prestige set: nigiri, torched otoro, A5 steak and bone broth finale.</p>
+        <div class="menu-card-footer">
+          <span class="menu-card-price">NT$ 4,800</span>
+          <span class="menu-card-tag seasonal">2人以上</span>
+        </div>
+      </div>
+      <div class="menu-card fade-in">
+        <p class="menu-card-num">S05</p>
+        <h3 class="menu-card-name">慶典包廂套餐</h3>
+        <p class="menu-card-name-en">Celebration Set</p>
+        <p class="menu-card-desc">專為紀念日、生日設計，含祝賀甜點、香檳一瓶及精裝菜單紀念冊。Designed for special occasions — includes celebration dessert, Champagne and a keepsake menu.</p>
+        <div class="menu-card-footer">
+          <span class="menu-card-price">NT$ 8,800</span>
+          <span class="menu-card-tag">2人份</span>
+        </div>
+      </div>
+      <div class="menu-card fade-in">
+        <p class="menu-card-num">S06</p>
+        <h3 class="menu-card-name">主廚餐桌體驗</h3>
+        <p class="menu-card-name-en">Chef's Table</p>
+        <p class="menu-card-desc">坐於吧台正前方，親眼見證林宸佑主廚的料理創作，並享有與主廚對話的機會。限2席。Sit at the counter, watch Chef Lin create and converse — an immersive 2-seat experience.</p>
+        <div class="menu-card-footer">
+          <span class="menu-card-price">NT$ 7,200</span>
+          <span class="menu-card-tag seasonal">每日限2席</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="tab-dessert" class="menu-content">
+    <div class="menu-grid">
+      <div class="menu-card fade-in">
+        <p class="menu-card-num">D01</p>
+        <h3 class="menu-card-name">抹茶提拉米蘇</h3>
+        <p class="menu-card-name-en">Matcha Tiramisu</p>
+        <p class="menu-card-desc">以宇治抹茶取代可可，搭配手指餅乾與馬斯卡彭乳酪，和魂洋技的完美融合。Uji matcha replaces cocoa in this East-meets-West tiramisu with mascarpone and ladyfingers.</p>
+        <div class="menu-card-footer">
+          <span class="menu-card-price">NT$ 280</span>
+          <span class="menu-card-tag">招牌</span>
+        </div>
+      </div>
+      <div class="menu-card fade-in">
+        <p class="menu-card-num">D02</p>
+        <h3 class="menu-card-name">黑芝麻布丁</h3>
+        <p class="menu-card-name-en">Black Sesame Pudding</p>
+        <p class="menu-card-desc">濃郁黑芝麻布丁，淋上金箔蜂蜜與酥脆芝麻酥，香氣層次豐富迷人。Intense black sesame pudding with gold leaf honey and sesame praline crumble.</p>
+        <div class="menu-card-footer">
+          <span class="menu-card-price">NT$ 260</span>
+          <span class="menu-card-tag">熱門</span>
+        </div>
+      </div>
+      <div class="menu-card fade-in">
+        <p class="menu-card-num">D03</p>
+        <h3 class="menu-card-name">柚子雪酪</h3>
+        <p class="menu-card-name-en">Yuzu Sorbet</p>
+        <p class="menu-card-desc">以新鮮高知柚子現製雪酪，清爽酸甜，搭配薄荷凍與柚子皮糖漬，清口怡神。Fresh Kochi yuzu sorbet with mint gelée and candied zest — the perfect palate cleanser.</p>
+        <div class="menu-card-footer">
+          <span class="menu-card-price">NT$ 220</span>
+          <span class="menu-card-tag seasonal">季節限定</span>
+        </div>
+      </div>
+      <div class="menu-card fade-in">
+        <p class="menu-card-num">D04</p>
+        <h3 class="menu-card-name">焦糖麻糬</h3>
+        <p class="menu-card-name-en">Caramel Mochi</p>
+        <p class="menu-card-desc">手工糯米麻糬淋上焦糖醬與海鹽，附北海道鮮奶油，甜鹹交織令人難忘。Handmade mochi drizzled with salted caramel, served with lush Hokkaido fresh cream.</p>
+        <div class="menu-card-footer">
+          <span class="menu-card-price">NT$ 250</span>
+          <span class="menu-card-tag">招牌</span>
+        </div>
+      </div>
+      <div class="menu-card fade-in">
+        <p class="menu-card-num">D05</p>
+        <h3 class="menu-card-name">季節水果聖代</h3>
+        <p class="menu-card-name-en">Seasonal Fruit Parfait</p>
+        <p class="menu-card-desc">以當季水果疊砌的華麗聖代，層層交疊和菓子奶凍、玄米茶冰淇淋與新鮮果粒。Layered parfait of wagashi panna cotta, genmaicha ice cream and seasonal fresh fruits.</p>
+        <div class="menu-card-footer">
+          <span class="menu-card-price">NT$ 380</span>
+          <span class="menu-card-tag seasonal">季節限定</span>
+        </div>
+      </div>
+      <div class="menu-card fade-in">
+        <p class="menu-card-num">D06</p>
+        <h3 class="menu-card-name">甜點師精選拼盤</h3>
+        <p class="menu-card-name-en">Dessert Moriawase</p>
+        <p class="menu-card-desc">五款迷你甜點拼盤，每日由甜點主廚精選，配以抹茶或煎茶一壺，適合與人共享。Five miniature desserts curated daily by our pastry chef, served with a pot of tea for two.</p>
+        <div class="menu-card-footer">
+          <span class="menu-card-price">NT$ 680</span>
+          <span class="menu-card-tag">2人分享</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience" id="experience" style="padding:0;">
+  <div class="experience-left fade-in">
+    <p class="section-tag">用餐體驗 · The Experience</p>
+    <h2 class="section-title">不只是用餐</h2>
+    <p class="section-title-en">More than a Meal</p>
+    <p>在雅，每一次到訪都是一場感官之旅。從推開門的那一刻起，我們便竭誠為您打造難忘的記憶。</p>
+    <div class="exp-items">
+      <div class="exp-item">
+        <div class="exp-item-icon">🍵</div>
+        <div>
+          <p class="exp-item-title">茶道儀式</p>
+          <p class="exp-item-desc">每一位顧客皆以宇治抹茶迎賓，感受日式茶道之美，由服務員親手點茶奉上。Guests are welcomed with a hand-whisked Uji matcha ceremony upon arrival.</p>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-item-icon">🌸</div>
+        <div>
+          <p class="exp-item-title">季節花藝</p>
+          <p class="exp-item-desc">由資深花道師每週更換插花，呼應當季食材與節氣，空間如詩如畫。Weekly ikebana arrangements by a certified ikenobo master echo the season's ingredients.</p>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-item-icon">🎋</div>
+        <div>
+          <p class="exp-item-title">私人包廂</p>
+          <p class="exp-item-desc">可容納2至12人的榻榻米和式包廂，搭載隔音系統，適合商務宴請或家庭聚會。Soundproofed tatami rooms for 2–12 guests — ideal for business dinners and celebrations.</p>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-item-icon">🍶</div>
+        <div>
+          <p class="exp-item-title">清酒配酒服務</p>
+          <p class="exp-item-desc">由日本酒士精選日本各地名酒，依菜色搭配推薦，讓料理與酒相得益彰。Our sake sommelier curates pairings from Japan's finest breweries to complement each course.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="experience-right">
+    <div class="experience-right-char">心</div>
+    <div class="exp-quote">
+      <p class="exp-quote-text">"真正的日本料理，是用心感受食材本身的靈魂。The soul of true Japanese cuisine lies in feeling the essence of each ingredient."</p>
+      <p class="exp-quote-author">林宸佑 Chef Lin Cheng-Yu — Head Chef & Founder</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- REVIEWS -->
+<section id="reviews" style="background:var(--cream); padding:7rem 5rem;">
+  <div style="text-align:center; margin-bottom:4rem;" class="fade-in">
+    <p class="section-tag">顧客評論 · Guest Reviews</p>
+    <h2 class="section-title">來自顧客的心聲</h2>
+    <p class="section-title-en">What Our Guests Say</p>
+    <div style="display:flex; gap:3rem; justify-content:center; margin-top:2rem;">
+      <div style="text-align:center;">
+        <span style="font-family:'Cormorant Garamond',serif; font-size:3rem; font-weight:300; color:var(--accent); display:block; line-height:1;">4.9</span>
+        <span style="font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--ink-faint);">Google Reviews</span>
+      </div>
+      <div style="width:1px; background:var(--border);"></div>
+      <div style="text-align:center;">
+        <span style="font-family:'Cormorant Garamond',serif; font-size:3rem; font-weight:300; color:var(--accent); display:block; line-height:1;">★★★</span>
+        <span style="font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--ink-faint);">Michelin Bib Gourmand 2023</span>
+      </div>
+      <div style="width:1px; background:var(--border);"></div>
+      <div style="text-align:center;">
+        <span style="font-family:'Cormorant Garamond',serif; font-size:3rem; font-weight:300; color:var(--accent); display:block; line-height:1;">#7</span>
+        <span style="font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--ink-faint);">Asia's 50 Best 2023 Nominee</span>
+      </div>
+    </div>
+  </div>
+  <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:2rem;">
+    <div class="fade-in" style="border:1px solid var(--border); padding:2.5rem; position:relative;">
+      <div style="font-size:3rem; font-family:'Cormorant Garamond',serif; color:var(--accent); line-height:1; margin-bottom:1.5rem; opacity:0.4;">"</div>
+      <p style="font-size:0.88rem; line-height:2; color:var(--ink-muted); margin-bottom:1.5rem;">每一道菜都讓我驚喜。林宸佑主廚對於食材的理解令人嘆服，特別是那道干貝昆布締，是我吃過最難忘的刺身之一。空間雅致，服務無可挑剔，值得每一分的等待。</p>
+      <div style="display:flex; align-items:center; gap:1rem; padding-top:1.5rem; border-top:1px solid var(--border);">
+        <div style="width:40px; height:40px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center; font-family:'Noto Serif JP',serif; font-size:0.9rem; color:var(--cream); font-weight:400;">陳</div>
+        <div>
+          <p style="font-size:0.82rem; font-weight:500; margin-bottom:0.15rem;">陳怡君</p>
+          <p style="font-size:0.7rem; color:var(--ink-faint);">Google · ★★★★★</p>
+        </div>
+      </div>
+    </div>
+    <div class="fade-in" style="border:1px solid var(--border); padding:2.5rem; position:relative; background:var(--washi);">
+      <div style="font-size:3rem; font-family:'Cormorant Garamond',serif; color:var(--accent); line-height:1; margin-bottom:1.5rem; opacity:0.4;">"</div>
+      <p style="font-size:0.88rem; line-height:2; color:var(--ink-muted); margin-bottom:1rem;">The omakase experience here is nothing short of extraordinary. Chef Lin's mastery of dashi and his intuitive understanding of balance — sweet, umami, acid — makes every course feel inevitable, like this is exactly what the ingredient was meant to become.</p>
+      <p style="font-size:0.82rem; line-height:1.9; color:var(--ink-muted); margin-bottom:1.5rem;">We booked the Chef's Table and it was the highlight of our entire trip to Taiwan.</p>
+      <div style="display:flex; align-items:center; gap:1rem; padding-top:1.5rem; border-top:1px solid var(--border);">
+        <div style="width:40px; height:40px; border-radius:50%; background:#4a6fa5; display:flex; align-items:center; justify-content:center; font-size:0.85rem; color:white; font-weight:500;">MR</div>
+        <div>
+          <p style="font-size:0.82rem; font-weight:500; margin-bottom:0.15rem;">Marcus Reynolds</p>
+          <p style="font-size:0.7rem; color:var(--ink-faint);">TripAdvisor · ★★★★★</p>
+        </div>
+      </div>
+    </div>
+    <div class="fade-in" style="border:1px solid var(--border); padding:2.5rem; position:relative;">
+      <div style="font-size:3rem; font-family:'Cormorant Garamond',serif; color:var(--accent); line-height:1; margin-bottom:1.5rem; opacity:0.4;">"</div>
+      <p style="font-size:0.88rem; line-height:2; color:var(--ink-muted); margin-bottom:1.5rem;">帶著父母來慶祝結婚週年，選了慶典包廂套餐。從迎賓的抹茶儀式、到最後主廚親自送上的祝賀甜點，整個晚上充滿驚喜。媽媽說是她吃過最好的料理，爸爸感動到落淚。</p>
+      <div style="display:flex; align-items:center; gap:1rem; padding-top:1.5rem; border-top:1px solid var(--border);">
+        <div style="width:40px; height:40px; border-radius:50%; background:#6b8f5e; display:flex; align-items:center; justify-content:center; font-family:'Noto Serif JP',serif; font-size:0.9rem; color:white; font-weight:400;">王</div>
+        <div>
+          <p style="font-size:0.82rem; font-weight:500; margin-bottom:0.15rem;">王建豪</p>
+          <p style="font-size:0.7rem; color:var(--ink-faint);">Google · ★★★★★</p>
+        </div>
+      </div>
+    </div>
+    <div class="fade-in" style="border:1px solid var(--border); padding:2.5rem; position:relative;">
+      <div style="font-size:3rem; font-family:'Cormorant Garamond',serif; color:var(--accent); line-height:1; margin-bottom:1.5rem; opacity:0.4;">"</div>
+      <p style="font-size:0.88rem; line-height:2; color:var(--ink-muted); margin-bottom:1.5rem;">作為一個常跑東京、大阪的老饕，在台北能吃到如此水準的懷石料理讓我非常驚訝。林宸佑主廚的高湯功力一流，茶碗蒸入口那一刻我幾乎以為自己在京都。</p>
+      <div style="display:flex; align-items:center; gap:1rem; padding-top:1.5rem; border-top:1px solid var(--border);">
+        <div style="width:40px; height:40px; border-radius:50%; background:#8b6a4a; display:flex; align-items:center; justify-content:center; font-family:'Noto Serif JP',serif; font-size:0.9rem; color:white; font-weight:400;">劉</div>
+        <div>
+          <p style="font-size:0.82rem; font-weight:500; margin-bottom:0.15rem;">劉思穎</p>
+          <p style="font-size:0.7rem; color:var(--ink-faint);">Google · ★★★★★</p>
+        </div>
+      </div>
+    </div>
+    <div class="fade-in" style="border:1px solid var(--border); padding:2.5rem; position:relative; background:var(--washi);">
+      <div style="font-size:3rem; font-family:'Cormorant Garamond',serif; color:var(--accent); line-height:1; margin-bottom:1.5rem; opacity:0.4;">"</div>
+      <p style="font-size:0.88rem; line-height:2; color:var(--ink-muted); margin-bottom:1.5rem;">台北最好的日本料理，沒有之一。每次帶外國客戶來這裡，他們都對林主廚的廚藝讚不絕口。食材新鮮度一流，服務細緻周到，環境典雅，是商務宴請的完美場所。</p>
+      <div style="display:flex; align-items:center; gap:1rem; padding-top:1.5rem; border-top:1px solid var(--border);">
+        <div style="width:40px; height:40px; border-radius:50%; background:#5a4a6b; display:flex; align-items:center; justify-content:center; font-family:'Noto Serif JP',serif; font-size:0.9rem; color:white; font-weight:400;">張</div>
+        <div>
+          <p style="font-size:0.82rem; font-weight:500; margin-bottom:0.15rem;">張立偉</p>
+          <p style="font-size:0.7rem; color:var(--ink-faint);">TripAdvisor · ★★★★★</p>
+        </div>
+      </div>
+    </div>
+    <div class="fade-in" style="border:1px solid var(--border); padding:2.5rem; position:relative;">
+      <div style="font-size:3rem; font-family:'Cormorant Garamond',serif; color:var(--accent); line-height:1; margin-bottom:1.5rem; opacity:0.4;">"</div>
+      <p style="font-size:0.88rem; line-height:2; color:var(--ink-muted); margin-bottom:1.5rem;">I've dined at many Japanese restaurants around Asia, but Miyabi stands out for its sincerity. You can feel Chef Lin's soul in every dish. The black sesame pudding dessert alone is worth the trip. Don't miss the seasonal oyster trio if it's available!</p>
+      <div style="display:flex; align-items:center; gap:1rem; padding-top:1.5rem; border-top:1px solid var(--border);">
+        <div style="width:40px; height:40px; border-radius:50%; background:#3a6b5a; display:flex; align-items:center; justify-content:center; font-size:0.85rem; color:white; font-weight:500;">SL</div>
+        <div>
+          <p style="font-size:0.82rem; font-weight:500; margin-bottom:0.15rem;">Sophie Laurent</p>
+          <p style="font-size:0.7rem; color:var(--ink-faint);">Google · ★★★★★</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FAQ -->
+<section id="faq" style="background:var(--washi); padding:7rem 5rem;">
+  <div style="text-align:center; margin-bottom:4rem;" class="fade-in">
+    <p class="section-tag">常見問題 · FAQ</p>
+    <h2 class="section-title">您想知道的</h2>
+    <p class="section-title-en">Frequently Asked Questions</p>
+  </div>
+  <div style="max-width:800px; margin:0 auto; display:flex; flex-direction:column; gap:1rem;">
+
+    <div class="faq-item fade-in">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>如何取消或更改訂位？</span>
+        <span class="faq-icon">＋</span>
+      </button>
+      <div class="faq-a">
+        <p>請於用餐日前48小時來電或以電子郵件通知我們，我們將盡力協助安排。逾時取消或無故未到，將酌收每人 NT$500 訂位保證金。</p>
+        <p style="margin-top:0.5rem; color:var(--ink-faint);">Please cancel or modify at least 48 hours in advance by phone or email. Late cancellations or no-shows may incur a NT$500 per person fee.</p>
+      </div>
+    </div>
+
+    <div class="faq-item fade-in">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>有提供素食或特殊飲食需求嗎？</span>
+        <span class="faq-icon">＋</span>
+      </button>
+      <div class="faq-a">
+        <p>我們可以配合素食、無麩質、海鮮過敏等特殊飲食需求，請於訂位時在「特殊需求」欄位填寫，或提前來電告知，主廚將為您特別設計料理。</p>
+        <p style="margin-top:0.5rem; color:var(--ink-faint);">We accommodate vegetarian, gluten-free, and allergy-related dietary needs. Please note them when booking and our chef will customize accordingly.</p>
+      </div>
+    </div>
+
+    <div class="faq-item fade-in">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>無菜單料理（Omakase）需要提前幾天預訂？</span>
+        <span class="faq-icon">＋</span>
+      </button>
+      <div class="faq-a">
+        <p>無菜單料理需至少提前 <strong>7個工作天</strong> 預訂，且每日僅提供有限席次。主廚餐桌體驗（Chef's Table）每日限2席，建議提前2週以上預訂。</p>
+        <p style="margin-top:0.5rem; color:var(--ink-faint);">Omakase requires at least 7 business days' advance booking. Chef's Table is limited to 2 seats daily — we recommend booking 2+ weeks ahead.</p>
+      </div>
+    </div>
+
+    <div class="faq-item fade-in">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>餐廳有停車場嗎？</span>
+        <span class="faq-icon">＋</span>
+      </button>
+      <div class="faq-a">
+        <p>餐廳本身無專屬停車場，建議搭乘大眾運輸工具前來。附近有仁愛路停車場（步行約5分鐘），或搭乘捷運至忠孝敦化站步行約8分鐘可抵達。</p>
+        <p style="margin-top:0.5rem; color:var(--ink-faint);">No dedicated parking. We recommend public transport. Nearest MRT: Zhongxiao Dunhua Station (8 min walk). Nearby parking available on Ren'ai Road.</p>
+      </div>
+    </div>
+
+    <div class="faq-item fade-in">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>可以攜帶自己的蛋糕慶祝生日嗎？</span>
+        <span class="faq-icon">＋</span>
+      </button>
+      <div class="faq-a">
+        <p>歡迎攜帶外部蛋糕，酌收 NT$300 開瓶費（含餐具與蠟燭服務）。若選擇我們的「慶典包廂套餐」，已包含專屬祝賀甜點，無須另外攜帶。</p>
+        <p style="margin-top:0.5rem; color:var(--ink-faint);">Outside cakes are welcome with a NT$300 cakeage fee (includes service, plates and candles). Our Celebration Set already includes a bespoke dessert.</p>
+      </div>
+    </div>
+
+    <div class="faq-item fade-in">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>餐廳的服裝規定是什麼？</span>
+        <span class="faq-icon">＋</span>
+      </button>
+      <div class="faq-a">
+        <p>我們建議穿著 <strong>Smart Casual</strong> 以上的服裝，以符合餐廳典雅的用餐氛圍。請避免穿著拖鞋、短褲或運動服前來，謝謝您的配合。</p>
+        <p style="margin-top:0.5rem; color:var(--ink-faint);">Smart casual or above is recommended to match our elegant atmosphere. Flip-flops, shorts and athletic wear are not permitted.</p>
+      </div>
+    </div>
+
+    <div class="faq-item fade-in">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>接受哪些付款方式？</span>
+        <span class="faq-icon">＋</span>
+      </button>
+      <div class="faq-a">
+        <p>我們接受現金、所有主要信用卡（Visa、Mastercard、JCB、American Express）、LINE Pay 及街口支付。恕不接受支票付款。</p>
+        <p style="margin-top:0.5rem; color:var(--ink-faint);">We accept cash, all major credit cards (Visa, Mastercard, JCB, Amex), LINE Pay and Jkopay. Cheques are not accepted.</p>
+      </div>
+    </div>
+
+    <div class="faq-item fade-in">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>可以開立發票或收據嗎？</span>
+        <span class="faq-icon">＋</span>
+      </button>
+      <div class="faq-a">
+        <p>可以，我們提供電子發票及紙本收據。如需公司抬頭統編，請於結帳前告知服務人員，我們將為您開立三聯式發票。</p>
+        <p style="margin-top:0.5rem; color:var(--ink-faint);">Yes. We issue electronic and paper receipts. For company invoices (GUI number), please inform your server before payment.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- RESERVATION -->
+<section class="reservation" id="reservation">
+  <p class="section-tag fade-in">線上訂位 · Reservation</p>
+  <h2 class="section-title fade-in">預訂您的座位</h2>
+  <p class="section-title-en fade-in">Reserve Your Table</p>
+  <p class="reservation-desc fade-in">
+    我們的座位十分有限，建議提前三日以上預訂。無菜單料理請提前七日訂位。
+    <br>Limited seating — we recommend booking 3+ days in advance. Omakase requires 7 days' notice.
+  </p>
+  <div class="res-form fade-in">
+    <input type="text" id="res-name" class="res-input" placeholder="姓名 Name *">
+    <input type="tel" id="res-phone" class="res-input" placeholder="電話 Phone *">
+    <input type="email" id="res-email" class="res-input" placeholder="電子信箱 Email">
+    <select id="res-party" class="res-select">
+      <option value="">人數 Party Size *</option>
+      <option value="1 人">1 人</option>
+      <option value="2 人">2 人</option>
+      <option value="3 人">3 人</option>
+      <option value="4 人">4 人</option>
+      <option value="5-8 人">5-8 人</option>
+      <option value="9+ 人 (包廂)">9+ 人（包廂）</option>
+    </select>
+    <input type="date" id="res-date" class="res-input" placeholder="日期 *">
+    <select id="res-time" class="res-select">
+      <option value="">時段 Time *</option>
+      <option value="11:30">午餐 11:30</option>
+      <option value="12:00">午餐 12:00</option>
+      <option value="12:30">午餐 12:30</option>
+      <option value="18:00">晚餐 18:00</option>
+      <option value="18:30">晚餐 18:30</option>
+      <option value="19:00">晚餐 19:00</option>
+      <option value="20:00">晚餐 20:00</option>
+    </select>
+    <textarea id="res-request" class="res-input res-form-full" rows="3" placeholder="特殊需求 Special Requests（過敏、紀念日等）" style="resize:vertical;"></textarea>
+    <button class="res-submit" onclick="handleReserve()">確認訂位 Confirm Reservation</button>
+    <p class="res-note">* 為必填欄位 · 訂位確認將於24小時內以電子信箱通知</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand"><span class="kanji">雅</span> Miyabi</div>
+    <p class="footer-desc">體驗最純粹的日式料理美學，<br>在繁忙都市中尋得一片寧靜。<br><br>The art of Japanese cuisine,<br>in the heart of Taipei.</p>
+  </div>
+  <div>
+    <p class="footer-col-title">導覽 Navigate</p>
+    <ul class="footer-links">
+      <li><a href="#about">關於我們</a></li>
+      <li><a href="#chef">主廚介紹</a></li>
+      <li><a href="#menu">菜單</a></li>
+      <li><a href="#experience">用餐體驗</a></li>
+      <li><a href="#reviews">顧客評論</a></li>
+      <li><a href="#faq">常見問題</a></li>
+      <li><a href="#reservation">線上訂位</a></li>
+    </ul>
+  </div>
+  <div class="footer-info">
+    <p class="footer-col-title">聯絡資訊 Contact</p>
+    <p>台北市大安區仁愛路四段<br>88號 2樓<br><br>88F, Sec. 4, Ren'ai Rd.<br>Da'an, Taipei<br><br>📞 02-2700-8888<br>✉ hello@miyabi-taipei.com</p>
+  </div>
+  <div class="footer-info">
+    <p class="footer-col-title">營業時間 Hours</p>
+    <p>
+      午餐 Lunch<br>11:30 — 14:00<br><br>
+      晚餐 Dinner<br>18:00 — 22:00<br><br>
+      週一公休<br>Closed Mondays
+    </p>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2025 雅 Miyabi Restaurant · All rights reserved</p>
+  <div class="footer-social">
+    <a href="#">Instagram</a>
+    <a href="#">Facebook</a>
+    <a href="#">Google Maps</a>
+  </div>
+</div>
+
+<script>
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = btn.classList.contains('open');
+    document.querySelectorAll('.faq-q.open').forEach(b => {
+      b.classList.remove('open');
+      b.nextElementSibling.classList.remove('open');
+    });
+    if (!isOpen) {
+      btn.classList.add('open');
+      answer.classList.add('open');
+    }
+  }
+
+  function switchTab(btn, id) {
+    document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.menu-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + id).classList.add('active');
+    document.querySelectorAll('#tab-' + id + ' .fade-in').forEach(el => {
+      el.classList.remove('visible');
+      setTimeout(() => el.classList.add('visible'), 50);
+    });
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  async function handleReserve() {
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzVrDURKwQz7Za265P7-YPqycumOqBXEMCip-4r1ptvY-auxPnLJIsltybPaDYqVxQX/exec';
+
+    const name    = document.getElementById('res-name').value.trim();
+    const phone   = document.getElementById('res-phone').value.trim();
+    const email   = document.getElementById('res-email').value.trim();
+    const party   = document.getElementById('res-party').value;
+    const dateVal = document.getElementById('res-date').value;
+    const time    = document.getElementById('res-time').value;
+    const request = document.getElementById('res-request').value.trim();
+
+    if (!name || !phone || !party || !dateVal || !time) {
+      alert('⚠️ 請填寫必填欄位：姓名、電話、人數、日期、時段。');
+      return;
+    }
+
+    const btn = document.querySelector('.res-submit');
+    btn.textContent = '送出中…';
+    btn.disabled = true;
+
+    const [year, month, day] = dateVal.split('-');
+
+    const body = new FormData();
+    body.append('entry.836241115',  name);
+    body.append('entry.1956261292', phone);
+    body.append('entry.454755785',  email);
+    body.append('entry.1934560729', party);
+    body.append('entry.2101004479_year',  year);
+    body.append('entry.2101004479_month', String(parseInt(month)));
+    body.append('entry.2101004479_day',   String(parseInt(day)));
+    body.append('entry.1013971419', time);
+    body.append('request', request);
+
+    try {
+      await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body });
+      alert('✅ 訂位已送出！我們將在24小時內以電子信箱確認。\nThank you! We will confirm within 24 hours.');
+      document.getElementById('res-name').value = '';
+      document.getElementById('res-phone').value = '';
+      document.getElementById('res-email').value = '';
+      document.getElementById('res-party').selectedIndex = 0;
+      document.getElementById('res-date').value = '';
+      document.getElementById('res-time').selectedIndex = 0;
+      document.getElementById('res-request').value = '';
+    } catch(err) {
+      alert('❌ 送出失敗，請稍後再試或來電：02-2700-8888');
+    } finally {
+      btn.textContent = '確認訂位 Confirm Reservation';
+      btn.disabled = false;
+    }
+  }
+</script>
+</body>
+</html>
