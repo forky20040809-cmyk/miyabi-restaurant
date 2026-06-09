@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>雅 Miyabi | 日式料理</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+TC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 80px; }
+.hero-text { display: flex; flex-direction: column; justify-content: center; padding: 6rem 4rem 6rem 5rem; }
+.hero-eyebrow { font-size: 0.7rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+.hero-eyebrow::before { content: ''; display: block; width: 2.5rem; height: 1px; background: var(--accent); }
+.hero-title { font-family: 'Noto Serif JP', serif; font-size: clamp(3.5rem, 6vw, 5.5rem); font-weight: 300; line-height: 1.15; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+.hero-title-en { font-family: 'Cormorant Garamond', serif; font-size: clamp(1rem, 2vw, 1.3rem); font-style: italic; font-weight: 300; color: var(--ink-muted); letter-spacing: 0.1em; margin-bottom: 2rem; }
+.hero-desc { font-size: 0.9rem; line-height: 2; color: var(--ink-muted); max-width: 400px; margin-bottom: 3rem; }
+.hero-cta { display: flex; gap: 1.5rem; align-items: center; }
+.hero-image { position: relative; overflow: hidden; background: var(--washi); }
+.hero-image-inner { position: absolute; inset: 0; background: linear-gradient(135deg, #2d1e0f 0%, #1a1611 60%); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.hero-motif { position: absolute; opacity: 0.08; font-family: 'Noto Serif JP', serif; font-size: 28rem; color: #f7f4ef; line-height: 1; user-select: none; animation: float 8s ease-in-out infinite; }
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+.hero-badge { position: absolute; bottom: 3rem; left: 3rem; border: 1px solid rgba(247,244,239,0.25); padding: 1.5rem 2rem; color: rgba(247,244,239,0.8); }
+.hero-badge-num { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 300; line-height: 1; color: var(--gold); display: block; margin-bottom: 0.25rem; }
+.hero-badge-label { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(247,244,239,0.6); }
+.hero-line { position: absolute; top: 3rem; right: 3rem; bottom: 3rem; left: 3rem; border: 1px solid rgba(247,244,239,0.06); pointer-events: none; }
+.features { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; background: var(--ink); }
+.feature-item { padding: 3rem 2.5rem; border-right: 1px solid rgba(247,244,239,0.08); }
+.feature-item:last-child { border-right: none; }
+.feature-num { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 300; color: var(--gold); display: block; margin-bottom: 0.5rem; }
+.feature-label { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(247,244,239,0.5); display: block; margin-bottom: 0.5rem; }
+.feature-desc { font-size: 0.82rem; line-height: 1.8; color: rgba(247,244,239,0.4); }
+@media (max-width: 900px) { .hero { grid-template-columns: 1fr; } .hero-image { display: none; } .hero-text { padding: 4rem 2rem; } .features { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><span class="kanji">雅</span> Miyabi</a>
+  <ul class="nav-links">
+    <li><a href="about.html">關於我們</a></li>
+    <li><a href="menu.html">菜單</a></li>
+    <li><a href="experience.html">用餐體驗</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="reservation.html">訂位</a></li>
+  </ul>
+  <a href="reservation.html" class="nav-reserve">立即訂位</a>
+</nav>
+
+<section class="hero" style="padding:0;">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Taipei · Est. 2018</p>
+    <h1 class="hero-title">雅</h1>
+    <p class="hero-title-en">Miyabi — The Art of Japanese Cuisine</p>
+    <p class="hero-desc">在繁忙都市中尋得一片寧靜。我們以季節食材為靈魂，以傳統技藝為基底，呈現最純粹的日本料理美學。</p>
+    <div class="hero-cta">
+      <a href="reservation.html" class="btn-primary">預訂座位</a>
+      <a href="menu.html" class="btn-ghost">探索菜單</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <div class="hero-image-inner">
+      <div class="hero-line"></div>
+      <span class="hero-motif">雅</span>
+      <div class="hero-badge">
+        <span class="hero-badge-num">12</span>
+        <span class="hero-badge-label">Omakase Courses</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="features">
+  <div class="feature-item fade-in">
+    <span class="feature-num">15+</span>
+    <span class="feature-label">年日本習藝</span>
+    <p class="feature-desc">主廚林宸佑於京都、東京習藝超過15年</p>
+  </div>
+  <div class="feature-item fade-in">
+    <span class="feature-num">12</span>
+    <span class="feature-label">Omakase 道數</span>
+    <p class="feature-desc">每日由主廚依食材精心設計的無菜單料理</p>
+  </div>
+  <div class="feature-item fade-in">
+    <span class="feature-num">40</span>
+    <span class="feature-label">精選座位</span>
+    <p class="feature-desc">有限席次確保每位賓客獲得最細緻的服務</p>
+  </div>
+  <div class="feature-item fade-in">
+    <span class="feature-num">★★★</span>
+    <span class="feature-label">米其林必比登</span>
+    <p class="feature-desc">2023 米其林必比登推介・亞洲50最佳提名</p>
+  </div>
+</div>
+
+<footer>
+  <div>
+    <div class="footer-brand"><span class="kanji">雅</span> Miyabi</div>
+    <p class="footer-desc">體驗最純粹的日式料理美學，<br>在繁忙都市中尋得一片寧靜。</p>
+  </div>
+  <div>
+    <p class="footer-col-title">導覽 Navigate</p>
+    <ul class="footer-links">
+      <li><a href="about.html">關於我們</a></li>
+      <li><a href="menu.html">菜單</a></li>
+      <li><a href="experience.html">用餐體驗</a></li>
+      <li><a href="faq.html">常見問題</a></li>
+      <li><a href="reservation.html">線上訂位</a></li>
+    </ul>
+  </div>
+  <div class="footer-info">
+    <p class="footer-col-title">聯絡資訊 Contact</p>
+    <p>台北市大安區仁愛路四段<br>88號 2樓<br><br>📞 02-2700-8888<br>✉ hello@miyabi-taipei.com</p>
+  </div>
+  <div class="footer-info">
+    <p class="footer-col-title">營業時間 Hours</p>
+    <p>午餐 Lunch<br>11:30 — 14:00<br><br>晚餐 Dinner<br>18:00 — 22:00<br><br>週一公休 Closed Mondays</p>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2025 雅 Miyabi Restaurant · All rights reserved</p>
+  <div class="footer-social"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">Google Maps</a></div>
+</div>
+<script>
+const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.12 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

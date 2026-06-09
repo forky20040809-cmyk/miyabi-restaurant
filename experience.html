@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>用餐體驗 | 雅 Miyabi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+TC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.page-hero { padding: 10rem 5rem 4rem; background: var(--ink); color: var(--cream); }
+.page-hero h1 { font-family: 'Noto Serif JP', serif; font-size: clamp(2.5rem,5vw,4rem); font-weight: 300; margin-bottom: 0.5rem; }
+.page-hero p { font-family: 'Cormorant Garamond', serif; font-style: italic; color: rgba(247,244,239,0.5); font-size: 1.1rem; }
+.experience { background: var(--ink); color: var(--cream); display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+.experience-left { padding: 7rem 4rem 7rem 5rem; display: flex; flex-direction: column; justify-content: center; }
+.experience-left .section-tag { color: var(--gold); }
+.experience-left .section-title { color: var(--cream); }
+.experience-left .section-title-en { color: rgba(247,244,239,0.5); }
+.experience-left p { font-size: 0.85rem; line-height: 2.1; color: rgba(247,244,239,0.7); margin-bottom: 1rem; }
+.exp-items { margin-top: 3rem; display: flex; flex-direction: column; gap: 1.5rem; }
+.exp-item { display: flex; gap: 1.5rem; align-items: flex-start; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(247,244,239,0.08); }
+.exp-item:last-child { border-bottom: none; padding-bottom: 0; }
+.exp-item-icon { width: 2.5rem; height: 2.5rem; min-width: 2.5rem; border: 1px solid rgba(247,244,239,0.2); display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+.exp-item-title { font-family: 'Noto Serif JP', serif; font-size: 0.95rem; margin-bottom: 0.25rem; color: var(--cream); }
+.exp-item-desc { font-size: 0.78rem; line-height: 1.8; color: rgba(247,244,239,0.55); }
+.experience-right { position: relative; overflow: hidden; background: linear-gradient(180deg, #2d1e0f 0%, #1a1611 100%); min-height: 600px; }
+.experience-right-char { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Noto Serif JP', serif; font-size: 20rem; font-weight: 300; color: rgba(247,244,239,0.04); user-select: none; }
+.exp-quote { position: absolute; bottom: 4rem; left: 3rem; right: 3rem; border-left: 2px solid var(--gold); padding: 1.5rem 2rem; }
+.exp-quote-text { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; font-weight: 300; color: rgba(247,244,239,0.85); line-height: 1.7; margin-bottom: 0.75rem; }
+.exp-quote-author { font-size: 0.7rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; }
+.reviews-section { background: var(--cream); padding: 7rem 5rem; }
+.reviews-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; margin-top: 3rem; }
+.review-card { border: 1px solid var(--border); padding: 2.5rem; }
+.review-quote-mark { font-size: 3rem; font-family: 'Cormorant Garamond', serif; color: var(--accent); line-height: 1; margin-bottom: 1.5rem; opacity: 0.4; }
+.review-text { font-size: 0.88rem; line-height: 2; color: var(--ink-muted); margin-bottom: 1.5rem; }
+.review-author { display: flex; align-items: center; gap: 1rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+.review-avatar { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; color: white; font-weight: 400; font-family: 'Noto Serif JP', serif; }
+.review-name { font-size: 0.82rem; font-weight: 500; margin-bottom: 0.15rem; }
+.review-platform { font-size: 0.7rem; color: var(--ink-faint); }
+.stats-bar { display: flex; gap: 3rem; justify-content: center; margin-bottom: 3rem; }
+.stat-item { text-align: center; }
+.stat-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; color: var(--accent); display: block; line-height: 1; }
+.stat-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); }
+@media (max-width: 900px) { .experience { grid-template-columns: 1fr; } .experience-right { min-height: 350px; } .reviews-grid { grid-template-columns: 1fr; } .reviews-section { padding: 4rem 2rem; } }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><span class="kanji">雅</span> Miyabi</a>
+  <ul class="nav-links">
+    <li><a href="about.html">關於我們</a></li>
+    <li><a href="menu.html">菜單</a></li>
+    <li><a href="experience.html" class="active">用餐體驗</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="reservation.html">訂位</a></li>
+  </ul>
+  <a href="reservation.html" class="nav-reserve">立即訂位</a>
+</nav>
+
+<div class="page-hero">
+  <p class="section-tag">The Experience</p>
+  <h1>不只是用餐</h1>
+  <p>More than a Meal</p>
+</div>
+
+<section class="experience" style="padding:0;">
+  <div class="experience-left fade-in">
+    <p class="section-tag">用餐體驗 · The Experience</p>
+    <h2 class="section-title">感官之旅</h2>
+    <p class="section-title-en">A Journey of the Senses</p>
+    <p>在雅，每一次到訪都是一場感官之旅。從推開門的那一刻起，我們便竭誠為您打造難忘的記憶。</p>
+    <div class="exp-items">
+      <div class="exp-item">
+        <div class="exp-item-icon">🍵</div>
+        <div><p class="exp-item-title">茶道儀式</p><p class="exp-item-desc">每一位顧客皆以宇治抹茶迎賓，由服務員親手點茶奉上。Guests are welcomed with a hand-whisked Uji matcha ceremony upon arrival.</p></div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-item-icon">🌸</div>
+        <div><p class="exp-item-title">季節花藝</p><p class="exp-item-desc">由資深花道師每週更換插花，呼應當季食材與節氣，空間如詩如畫。Weekly ikebana arrangements echo the season's ingredients.</p></div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-item-icon">🎋</div>
+        <div><p class="exp-item-title">私人包廂</p><p class="exp-item-desc">可容納2至12人的榻榻米和式包廂，搭載隔音系統，適合商務宴請或家庭聚會。Soundproofed tatami rooms for 2–12 guests.</p></div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-item-icon">🍶</div>
+        <div><p class="exp-item-title">清酒配酒服務</p><p class="exp-item-desc">由日本酒士精選日本各地名酒，依菜色搭配推薦。Our sake sommelier curates pairings from Japan's finest breweries.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="experience-right">
+    <div class="experience-right-char">心</div>
+    <div class="exp-quote">
+      <p class="exp-quote-text">"真正的日本料理，是用心感受食材本身的靈魂。The soul of true Japanese cuisine lies in feeling the essence of each ingredient."</p>
+      <p class="exp-quote-author">林宸佑 Chef Lin Cheng-Yu — Head Chef & Founder</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="reviews-section">
+  <p class="section-tag" style="text-align:center;">顧客評論 · Guest Reviews</p>
+  <h2 class="section-title" style="text-align:center;">來自顧客的心聲</h2>
+  <p class="section-title-en" style="text-align:center;">What Our Guests Say</p>
+  <div class="stats-bar">
+    <div class="stat-item"><span class="stat-num">4.9</span><span class="stat-label">Google Reviews</span></div>
+    <div style="width:1px; background:var(--border);"></div>
+    <div class="stat-item"><span class="stat-num">★★★</span><span class="stat-label">Michelin Bib Gourmand 2023</span></div>
+    <div style="width:1px; background:var(--border);"></div>
+    <div class="stat-item"><span class="stat-num">#7</span><span class="stat-label">Asia's 50 Best 2023 Nominee</span></div>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card fade-in"><div class="review-quote-mark">"</div><p class="review-text">每一道菜都讓我驚喜。林宸佑主廚對於食材的理解令人嘆服，特別是那道干貝昆布締，是我吃過最難忘的刺身之一。</p><div class="review-author"><div class="review-avatar" style="background:var(--accent);">陳</div><div><p class="review-name">陳怡君</p><p class="review-platform">Google · ★★★★★</p></div></div></div>
+    <div class="review-card fade-in" style="background:var(--washi);"><div class="review-quote-mark">"</div><p class="review-text">The omakase experience here is nothing short of extraordinary. Chef Lin's mastery of dashi makes every course feel inevitable.</p><div class="review-author"><div class="review-avatar" style="background:#4a6fa5;">MR</div><div><p class="review-name">Marcus Reynolds</p><p class="review-platform">TripAdvisor · ★★★★★</p></div></div></div>
+    <div class="review-card fade-in"><div class="review-quote-mark">"</div><p class="review-text">帶著父母來慶祝結婚週年，從迎賓的抹茶儀式到最後主廚親自送上的祝賀甜點，整個晚上充滿驚喜。</p><div class="review-author"><div class="review-avatar" style="background:#6b8f5e;">王</div><div><p class="review-name">王建豪</p><p class="review-platform">Google · ★★★★★</p></div></div></div>
+    <div class="review-card fade-in"><div class="review-quote-mark">"</div><p class="review-text">作為一個常跑東京、大阪的老饕，在台北能吃到如此水準的懷石料理讓我非常驚訝。林宸佑主廚的高湯功力一流。</p><div class="review-author"><div class="review-avatar" style="background:#8b6a4a;">劉</div><div><p class="review-name">劉思穎</p><p class="review-platform">Google · ★★★★★</p></div></div></div>
+    <div class="review-card fade-in" style="background:var(--washi);"><div class="review-quote-mark">"</div><p class="review-text">台北最好的日本料理，沒有之一。每次帶外國客戶來這裡，他們都對林主廚的廚藝讚不絕口。</p><div class="review-author"><div class="review-avatar" style="background:#5a4a6b;">張</div><div><p class="review-name">張立偉</p><p class="review-platform">TripAdvisor · ★★★★★</p></div></div></div>
+    <div class="review-card fade-in"><div class="review-quote-mark">"</div><p class="review-text">I've dined at many Japanese restaurants around Asia, but Miyabi stands out for its sincerity. The black sesame pudding alone is worth the trip.</p><div class="review-author"><div class="review-avatar" style="background:#3a6b5a;">SL</div><div><p class="review-name">Sophie Laurent</p><p class="review-platform">Google · ★★★★★</p></div></div></div>
+  </div>
+</section>
+
+<footer>
+  <div><div class="footer-brand"><span class="kanji">雅</span> Miyabi</div><p class="footer-desc">體驗最純粹的日式料理美學，<br>在繁忙都市中尋得一片寧靜。</p></div>
+  <div><p class="footer-col-title">導覽 Navigate</p><ul class="footer-links"><li><a href="about.html">關於我們</a></li><li><a href="menu.html">菜單</a></li><li><a href="experience.html">用餐體驗</a></li><li><a href="faq.html">常見問題</a></li><li><a href="reservation.html">線上訂位</a></li></ul></div>
+  <div class="footer-info"><p class="footer-col-title">聯絡資訊 Contact</p><p>台北市大安區仁愛路四段<br>88號 2樓<br><br>📞 02-2700-8888<br>✉ hello@miyabi-taipei.com</p></div>
+  <div class="footer-info"><p class="footer-col-title">營業時間 Hours</p><p>午餐 Lunch<br>11:30 — 14:00<br><br>晚餐 Dinner<br>18:00 — 22:00<br><br>週一公休 Closed Mondays</p></div>
+</footer>
+<div class="footer-bottom"><p>© 2025 雅 Miyabi Restaurant · All rights reserved</p><div class="footer-social"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">Google Maps</a></div></div>
+<script>
+const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.12 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

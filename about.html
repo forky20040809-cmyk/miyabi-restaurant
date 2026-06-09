@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>關於我們 | 雅 Miyabi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+TC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.page-hero { padding: 10rem 5rem 4rem; background: var(--ink); color: var(--cream); }
+.page-hero h1 { font-family: 'Noto Serif JP', serif; font-size: clamp(2.5rem,5vw,4rem); font-weight: 300; margin-bottom: 0.5rem; }
+.page-hero p { font-family: 'Cormorant Garamond', serif; font-style: italic; color: rgba(247,244,239,0.5); font-size: 1.1rem; }
+.about { background: var(--washi); display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+.about-image-block { position: relative; aspect-ratio: 4/5; overflow: hidden; }
+.about-img { width: 100%; height: 100%; background: #2d1e0f; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.about-img-char { font-family: 'Noto Serif JP', serif; font-size: 14rem; font-weight: 300; color: rgba(247,244,239,0.06); position: absolute; }
+.about-img-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(26,22,17,0.4) 100%); }
+.about-img-label { position: absolute; bottom: 2rem; left: 2rem; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic; font-weight: 300; color: rgba(247,244,239,0.85); letter-spacing: 0.08em; }
+.about-accent-box { position: absolute; top: -1.5rem; right: -1.5rem; width: 60%; height: 60%; border: 1px solid var(--border); z-index: -1; background: var(--cream); }
+.about-text p { font-size: 0.9rem; line-height: 2.2; color: var(--ink-muted); margin-bottom: 1.5rem; }
+.about-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; padding-top: 3rem; border-top: 1px solid var(--border); }
+.about-stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 300; color: var(--accent); display: block; }
+.about-stat-label { font-size: 0.7rem; letter-spacing: 0.15em; color: var(--ink-faint); text-transform: uppercase; }
+@media (max-width: 900px) { .about { grid-template-columns: 1fr; gap: 3rem; } .about-accent-box { display: none; } .page-hero { padding: 8rem 2rem 3rem; } }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><span class="kanji">雅</span> Miyabi</a>
+  <ul class="nav-links">
+    <li><a href="about.html" class="active">關於我們</a></li>
+    <li><a href="menu.html">菜單</a></li>
+    <li><a href="experience.html">用餐體驗</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="reservation.html">訂位</a></li>
+  </ul>
+  <a href="reservation.html" class="nav-reserve">立即訂位</a>
+</nav>
+
+<div class="page-hero">
+  <p class="section-tag">About Us</p>
+  <h1>關於雅 Miyabi</h1>
+  <p>Cuisine as a Form of Art</p>
+</div>
+
+<section class="about" id="about">
+  <div class="about-image-block fade-in">
+    <div class="about-img">
+      <span class="about-img-char">和</span>
+      <div class="about-img-overlay"></div>
+      <span class="about-img-label">Harmony in every dish</span>
+    </div>
+    <div class="about-accent-box"></div>
+  </div>
+  <div class="about-text fade-in">
+    <p class="section-tag">關於雅 · About Us</p>
+    <h2 class="section-title">料理即是藝術</h2>
+    <p class="section-title-en">Cuisine as a Form of Art</p>
+    <p>雅 Miyabi 由主廚林宸佑於2018年創立。林宸佑自幼熱愛料理，二十歲負笈日本，先後於京都懷石名店「瓢亭」及東京米其林三星割烹習藝長達十五年，深刻體會「一期一會」的精神。返台後，他決心以台灣豐沛的在地食材結合道地日本技藝，打造這片屬於台灣的料理美學空間。</p>
+    <p>Chef Lin Cheng-Yu honed his craft over 15 years in Japan — at the legendary Hyotei in Kyoto and a three-Michelin-star kappo in Tokyo. Returning to Taiwan, he founded Miyabi to bridge the finest Japanese culinary traditions with the island's exceptional local produce.</p>
+    <div class="about-stats">
+      <div><span class="about-stat-num">15+</span><span class="about-stat-label">年日本習藝</span></div>
+      <div><span class="about-stat-num">98%</span><span class="about-stat-label">顧客好評率</span></div>
+      <div><span class="about-stat-num">40</span><span class="about-stat-label">精選座位</span></div>
+    </div>
+    <div style="margin-top:2rem; padding:1.5rem; border-left: 2px solid var(--accent); background: var(--cream);">
+      <p style="font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-style:italic; color:var(--ink-muted); line-height:1.8; margin-bottom:0.5rem;">"料理不只是填飽肚子，而是以食物傳遞情感，讓每一位到訪的客人，都能感受到被珍視的溫度。"</p>
+      <p style="font-size:0.72rem; letter-spacing:0.15em; color:var(--accent); text-transform:uppercase;">— 林宸佑 Chef Lin Cheng-Yu</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="chef" style="background:var(--cream); padding:7rem 5rem;">
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:center;">
+    <div class="fade-in">
+      <p class="section-tag">主廚介紹 · Meet the Chef</p>
+      <h2 class="section-title">林宸佑</h2>
+      <p class="section-title-en">Chef Lin Cheng-Yu</p>
+      <p style="font-size:0.9rem;line-height:2.2;color:var(--ink-muted);margin-bottom:1.25rem;">1985年生於台南，林宸佑自高中起便深受日本飲食文化吸引。19歲隻身赴日，初入京都老舖磨練基本功，從洗碗、備料做起，五年後獲得師父認可，升任板前主廚助理。</p>
+      <p style="font-size:0.9rem;line-height:2.2;color:var(--ink-muted);margin-bottom:1.25rem;">2008年轉赴東京，加入米其林三星割烹「銀座 木村」，在嚴格的日式廚房文化中淬鍊技藝，精通懷石料理各道工序，並深研高湯萃取、刀工美學與食材時令哲學。</p>
+      <p style="font-size:0.9rem;line-height:2.2;color:var(--ink-muted);margin-bottom:2rem;">Born in Tainan in 1985, Chef Lin left for Japan at 19 with nothing but passion. After fifteen years mastering kaiseki at Kyoto's Hyotei and a Michelin three-star kappo in Ginza, he returned home to open Miyabi.</p>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+        <div style="padding:1.25rem; border:1px solid var(--border);"><p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem;">訓練背景</p><p style="font-size:0.82rem;line-height:1.8;color:var(--ink-muted);">京都 瓢亭<br>東京 銀座 木村（米其林★★★）<br>大阪 吉兆 研修</p></div>
+        <div style="padding:1.25rem; border:1px solid var(--border);"><p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem;">榮耀獎項</p><p style="font-size:0.82rem;line-height:1.8;color:var(--ink-muted);">2021 台灣美食之星<br>2022 亞洲50最佳餐廳提名<br>2023 米其林必比登推介</p></div>
+        <div style="padding:1.25rem; border:1px solid var(--border);"><p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem;">料理哲學</p><p style="font-size:0.82rem;line-height:1.8;color:var(--ink-muted);">一期一會．食材本味<br>以台灣四季物產為魂<br>傳統技藝融合現代美學</p></div>
+        <div style="padding:1.25rem; border:1px solid var(--border);"><p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem;">媒體報導</p><p style="font-size:0.82rem;line-height:1.8;color:var(--ink-muted);">商業周刊封面人物<br>天下雜誌美食專題<br>CNN Travel 台灣美食推薦</p></div>
+      </div>
+    </div>
+    <div class="fade-in" style="position:relative;">
+      <div style="aspect-ratio:3/4; background:linear-gradient(160deg,#2d1e0f,#1a1611); display:flex; align-items:center; justify-content:center; overflow:hidden; position:relative;">
+        <span style="font-family:'Noto Serif JP',serif; font-size:18rem; font-weight:300; color:rgba(247,244,239,0.05); position:absolute; user-select:none;">匠</span>
+        <div style="position:absolute; bottom:0; left:0; right:0; padding:2.5rem; background:linear-gradient(transparent,rgba(26,22,17,0.85));">
+          <p style="font-family:'Noto Serif JP',serif; font-size:1.4rem; color:var(--cream); margin-bottom:0.25rem;">林宸佑</p>
+          <p style="font-family:'Cormorant Garamond',serif; font-size:0.9rem; font-style:italic; color:var(--gold);">Head Chef & Founder, Miyabi</p>
+        </div>
+        <div style="position:absolute; top:2rem; right:2rem; border:1px solid rgba(247,244,239,0.15); padding:1rem 1.25rem; text-align:center;">
+          <span style="font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:300; color:var(--gold); display:block; line-height:1;">15</span>
+          <span style="font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(247,244,239,0.5);">Years in Japan</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div><div class="footer-brand"><span class="kanji">雅</span> Miyabi</div><p class="footer-desc">體驗最純粹的日式料理美學，<br>在繁忙都市中尋得一片寧靜。</p></div>
+  <div><p class="footer-col-title">導覽 Navigate</p><ul class="footer-links"><li><a href="about.html">關於我們</a></li><li><a href="menu.html">菜單</a></li><li><a href="experience.html">用餐體驗</a></li><li><a href="faq.html">常見問題</a></li><li><a href="reservation.html">線上訂位</a></li></ul></div>
+  <div class="footer-info"><p class="footer-col-title">聯絡資訊 Contact</p><p>台北市大安區仁愛路四段<br>88號 2樓<br><br>📞 02-2700-8888<br>✉ hello@miyabi-taipei.com</p></div>
+  <div class="footer-info"><p class="footer-col-title">營業時間 Hours</p><p>午餐 Lunch<br>11:30 — 14:00<br><br>晚餐 Dinner<br>18:00 — 22:00<br><br>週一公休 Closed Mondays</p></div>
+</footer>
+<div class="footer-bottom"><p>© 2025 雅 Miyabi Restaurant · All rights reserved</p><div class="footer-social"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">Google Maps</a></div></div>
+<script>
+const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.12 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
